@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -60,6 +61,23 @@ export class RecipeController {
       this.recipeService.recipeSave(data);
 
       return sendData(res, data, 'Recipe Updated Successfully!', 201);
+    } catch (err) {
+      return sendError(res, err);
+    }
+  }
+
+  @Delete('delete/:id')
+  async delete(
+    @Param('id') id: string,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    try {
+      const data = await this.recipeService.findOne(+id);
+      if (!data)
+        return sendError(res, 'Recipe Not Found!', HttpStatus?.NOT_FOUND);
+      this.recipeService.recipeDelete(+id);
+      return sendData(res, {}, 'Recipe Deleted Successfully!', 201);
     } catch (err) {
       return sendError(res, err);
     }
