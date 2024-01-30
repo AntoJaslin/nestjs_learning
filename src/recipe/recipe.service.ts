@@ -23,4 +23,8 @@ export class RecipeService {
   async recipeSave(data: Recipe) {
     return await this.recipeRepository.save(data);
   }
+
+  async recipeDelete(id: number) {
+    return await this.recipeRepository.delete(id);
+  }
 }
