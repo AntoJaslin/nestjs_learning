@@ -15,4 +15,12 @@ export class RecipeService {
   async create(data: Recipe) {
     return await this.recipeRepository.save(data);
   }
+
+  async findOne(id: number) {
+    return await this.recipeRepository.findOne({ where: { id } });
+  }
+
+  async recipeSave(data: Recipe) {
+    return await this.recipeRepository.save(data);
+  }
 }
